@@ -26,8 +26,4 @@ router.get('/dashboard', protected, async (req, res) => {
   }
 });
 
-router.use((req, res, next) => {
-  res.render('error/404');
-});
-
 module.exports = router;

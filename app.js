@@ -28,6 +28,10 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+// Parse body data
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // Set handlebars as the view engine
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
@@ -49,6 +53,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
+app.use('/stories', require('./routes/stories'));
+
+// Not found
+app.use((req, res, next) => {
+    res.render('error/404');
+});
 
 // Set hosting port
 const PORT = process.env.PORT || 3000;
