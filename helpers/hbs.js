@@ -1,10 +1,10 @@
 const moment = require('moment');
 
 module.exports = {
-  formatDate: function(date, format) {
+  formatDate: function (date, format) {
     return moment(date).format(format);
   },
-  truncate: function(str, len) {
+  truncate: function (str, len) {
     if (str.length > len && str.length > 0) {
       let new_str = str + ' ';
       new_str = str.substr(0, len);
@@ -14,13 +14,13 @@ module.exports = {
     }
     return str;
   },
-  stripTags: function(input) {
+  stripTags: function (input) {
     return input.replace(/<(?:.|\n)*?>/gm, '');
   },
-  editIcon: function(storyUser, loggedUser, storyId, floating = false) {
+  editIcon: function (storyUser, loggedUser, storyId, floating = false) {
     if (storyUser._id.toString() == loggedUser._id.toString()) {
       if (floating) {
-        return `<a href='/stories/edit/${storyId}' 
+        return `<a href='/stories/edit/${storyId}'
           class='btn-floating halfway-fab blue'><i class='fas fa-edit fa-small'></i></a>`;
       } else {
         return `<a href='/stories/edit/${storyId}'><i class='fas fa-edit'></i></a>`;
@@ -28,5 +28,17 @@ module.exports = {
     } else {
       return '';
     }
-  }
+  },
+  select: function (selected, options) {
+    return options
+      .fn(this)
+      .replace(
+        new RegExp(' value="' + selected + '"'),
+        '$& selected="selected"'
+      )
+      .replace(
+        new RegExp('>' + selected + '</option>'),
+        ' selected="selected"$&'
+      );
+  },
 };
