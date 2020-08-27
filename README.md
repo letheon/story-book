@@ -10,3 +10,6 @@
 4. Run `npm install`
 5. Use `npm run dev` to start developer mode with nodemon
 6. Use `npm start` to run in production mode
+
+### Based on:
+https://www.youtube.com/watch?v=SBvmnHTQIPY
